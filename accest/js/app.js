@@ -131,25 +131,58 @@ function loadCities(countryName, container) {
         return;
       }
 
+    
+      const searchBox = document.createElement("input");
+      searchBox.type = "text";
+      searchBox.placeholder = "Search city...";
+      searchBox.className = "city-search";
+      searchBox.style = `
+        width: 100%;
+        padding: 8px 10px;
+        margin-bottom: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+      `;
+
       const citiesGrid = document.createElement("div");
       citiesGrid.className = "cities-grid";
+      citiesGrid.style = `
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 8px;
+      `;
 
-      data.data.forEach((city) => {
-        const cityItem = document.createElement("div");
-        cityItem.className = "city-item";
+    
+      function displayCities(cities) {
+        citiesGrid.innerHTML = "";
+        cities.forEach((city) => {
+          const cityItem = document.createElement("div");
+          cityItem.className = "city-item";
 
-        // ✅ Create a clickable link
-        const link = document.createElement("a");
-        link.href = `city.html?name=${encodeURIComponent(city)}`;
-        link.textContent = city;
-        link.style.textDecoration = "none";
-        link.style.color = "#333";
+          const link = document.createElement("a");
+          link.href = `city.html?name=${encodeURIComponent(city)}`;
+          link.textContent = city;
+          link.style.textDecoration = "none";
+          link.style.color = "#333";
 
-        cityItem.appendChild(link);
-        citiesGrid.appendChild(cityItem);
+          cityItem.appendChild(link);
+          citiesGrid.appendChild(cityItem);
+        });
+      }
+
+      displayCities(data.data);
+
+    
+      searchBox.addEventListener("input", () => {
+        const keyword = searchBox.value.toLowerCase().trim();
+        const filtered = data.data.filter((c) =>
+          c.toLowerCase().includes(keyword)
+        );
+        displayCities(filtered);
       });
 
       citiesDiv.innerHTML = "<h3>Major Cities</h3>";
+      citiesDiv.appendChild(searchBox);
       citiesDiv.appendChild(citiesGrid);
     })
     .catch((err) => {
@@ -157,6 +190,7 @@ function loadCities(countryName, container) {
         '<h3>Major Cities</h3><p style="color: #666;">Could not load cities</p>';
     });
 }
+
 
 function createImagesSection(country) {
   let html =
