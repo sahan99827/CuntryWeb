@@ -351,10 +351,10 @@
     height: 100vh;
     overflow: hidden;
     z-index: -1;
-    opacity: 0.5; /* adjust background visibility */
+    opacity: 0.8; /* adjust background visibility */
 }
 
-#weatherVideo {
+#backgroundVideo {
     width: 100%;
     height: 100%;
     object-fit: cover;
