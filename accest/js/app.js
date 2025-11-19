@@ -79,6 +79,7 @@ function createCountryCard(country) {
                     <div class="flag-container">
                         <img src="${country.flags.svg}" alt="Flag of ${country.name.common}">
                         <div class="flag-overlay">
+                            <img src="${country.flags.svg}" alt="Flag of ${country.name.common}">
                             <h2 class="country-name">${country.name.common}</h2>
                             <button class="map-button" onclick="showMap(${lat}, ${lng}, '${country.name.common}')">🗺️ View Map</button>
                         </div>
@@ -197,31 +198,20 @@ function createImagesSection(country) {
     '<div class="images-section"><h3> Country Images</h3><div class="image-grid">';
 
   if (country.flags) {
-    if (country.flags.svg) {
-      html += `<div class="image-item">
-                        <img src="${country.flags.svg}" alt="Flag SVG" onclick="window.open('${country.flags.svg}', '_blank')">
-                        <div class="image-label">Flag (SVG)</div>
-                    </div>`;
-    }
+  
     if (country.flags.png) {
       html += `<div class="image-item">
                         <img src="${country.flags.png}" alt="Flag PNG" onclick="window.open('${country.flags.png}', '_blank')">
-                        <div class="image-label">Flag (PNG)</div>
+                        <div class="image-label">Cuntry Flag</div>
                     </div>`;
     }
   }
 
   if (country.coatOfArms) {
-    if (country.coatOfArms.svg) {
-      html += `<div class="image-item">
-                        <img src="${country.coatOfArms.svg}" alt="Coat of Arms SVG" onclick="window.open('${country.coatOfArms.svg}', '_blank')">
-                        <div class="image-label">Coat of Arms (SVG)</div>
-                    </div>`;
-    }
     if (country.coatOfArms.png) {
       html += `<div class="image-item">
                         <img src="${country.coatOfArms.png}" alt="Coat of Arms PNG" onclick="window.open('${country.coatOfArms.png}', '_blank')">
-                        <div class="image-label">Coat of Arms (PNG)</div>
+                        <div class="image-label">Coat of Arms</div>
                     </div>`;
     }
   }
